@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohamed Fathy – Software Engineer & ML Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --border: rgba(255,255,255,0.08);
+    --border-bright: rgba(255,255,255,0.18);
+    --accent: #5b6af7;
+    --accent2: #a78bfa;
+    --gold: #f4c542;
+    --text: #f0eff8;
+    --muted: #8b8aa0;
+    --card: #14141e;
+    --tag-bg: rgba(91,106,247,0.12);
+    --tag-color: #a0aaff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 4rem;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 1.1rem;
+    color: var(--text); text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 4rem 4rem;
+    position: relative;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 40%, rgba(91,106,247,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 60%, rgba(167,139,250,0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--tag-bg); color: var(--tag-color);
+    border: 1px solid rgba(91,106,247,0.25);
+    padding: 6px 16px; border-radius: 100px;
+    font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+  .hero-tag::before {
+    content: ''; width: 6px; height: 6px;
+    border-radius: 50%; background: #4ade80;
+    box-shadow: 0 0 6px #4ade80;
+  }
+  h1.hero-name {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 800; line-height: 0.95;
+    letter-spacing: -0.04em;
+    margin-bottom: 1rem;
+  }
+  h1.hero-name em {
+    font-style: italic;
+    font-family: 'Instrument Serif', serif;
+    color: var(--accent2);
+  }
+  .hero-sub {
+    font-family: 'DM Mono', monospace;
+    color: var(--muted); font-size: 1rem;
+    max-width: 520px; margin-bottom: 3rem;
+    line-height: 1.7;
+  }
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 28px; border-radius: 8px;
+    font-family: 'DM Mono', monospace; font-size: 0.8rem;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    text-decoration: none; cursor: pointer; transition: all 0.2s;
+    border: none;
+  }
+  .btn-primary {
+    background: var(--accent); color: #fff;
+  }
+  .btn-primary:hover { background: #6b7aff; transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent; color: var(--text);
+    border: 1px solid var(--border-bright);
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  .hero-scroll {
+    position: absolute; bottom: 2rem; left: 4rem;
+    display: flex; align-items: center; gap: 12px;
+    color: var(--muted); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .hero-scroll::before {
+    content: '';
+    display: block; width: 40px; height: 1px;
+    background: var(--muted);
+  }
+
+  /* SECTIONS */
+  section { padding: 6rem 4rem; }
+  .section-label {
+    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.5rem;
+  }
+  h2.section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 700; line-height: 1.05; letter-spacing: -0.03em;
+    margin-bottom: 3rem;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+    align-items: center;
+  }
+  .about-text p { color: var(--muted); line-height: 1.9; margin-bottom: 1rem; }
+  .about-text p strong { color: var(--text); font-weight: 500; }
+  .about-stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+  }
+  .stat-box {
+    background: var(--card); padding: 2rem;
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.5rem; font-weight: 800;
+    color: var(--accent2);
+    letter-spacing: -0.04em;
+  }
+  .stat-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;
+  }
+  .skill-card {
+    background: var(--card);
+    border: 1px solid var(--border); border-radius: 12px;
+    padding: 1.75rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .skill-card:hover { border-color: var(--border-bright); transform: translateY(-4px); }
+  .skill-card-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; margin-bottom: 1rem;
+  }
+  .skill-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem; font-weight: 700; margin-bottom: 0.75rem;
+    color: var(--text);
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    background: var(--tag-bg); color: var(--tag-color);
+    padding: 4px 10px; border-radius: 6px;
+    font-size: 0.72rem; border: 1px solid rgba(91,106,247,0.15);
+  }
+
+  /* EXPERIENCE */
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .timeline-item {
+    display: grid; grid-template-columns: 180px 1px 1fr; gap: 0 2rem;
+    padding-bottom: 3rem;
+  }
+  .timeline-date {
+    font-size: 0.78rem; color: var(--muted);
+    text-align: right; padding-top: 4px;
+  }
+  .timeline-line {
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .timeline-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--accent); flex-shrink: 0; margin-top: 6px;
+    box-shadow: 0 0 10px rgba(91,106,247,0.5);
+  }
+  .timeline-connector {
+    flex: 1; width: 1px; background: var(--border); margin-top: 4px;
+  }
+  .timeline-item:last-child .timeline-connector { display: none; }
+  .timeline-body { padding-top: 0; }
+  .timeline-body h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem; font-weight: 700; margin-bottom: 2px;
+  }
+  .timeline-body .company {
+    font-size: 0.8rem; color: var(--accent); margin-bottom: 0.75rem;
+  }
+  .timeline-body p { color: var(--muted); font-size: 0.85rem; line-height: 1.8; }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;
+  }
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border); border-radius: 16px;
+    padding: 2rem; position: relative; overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+    cursor: default;
+  }
+  .project-card:hover { border-color: rgba(91,106,247,0.4); transform: translateY(-6px); }
+  .project-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .project-card:hover::before { opacity: 1; }
+  .project-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 3rem; font-weight: 800;
+    color: rgba(255,255,255,0.04);
+    position: absolute; top: 1rem; right: 1.5rem;
+  }
+  .project-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.15rem; font-weight: 700;
+    margin-bottom: 0.75rem; line-height: 1.3;
+  }
+  .project-card p { color: var(--muted); font-size: 0.82rem; line-height: 1.8; margin-bottom: 1.25rem; }
+
+  /* COURSES */
+  .courses-list { display: flex; flex-direction: column; gap: 1rem; }
+  .course-item {
+    display: flex; align-items: center; gap: 1.5rem;
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 1.25rem 1.75rem;
+    transition: border-color 0.2s;
+  }
+  .course-item:hover { border-color: var(--border-bright); }
+  .course-badge {
+    width: 44px; height: 44px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.7rem; text-align: center;
+    flex-shrink: 0; letter-spacing: 0.04em;
+  }
+  .course-info h4 { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 600; margin-bottom: 2px; }
+  .course-info p { color: var(--muted); font-size: 0.78rem; }
+
+  /* ACTIVITIES */
+  .activities-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;
+  }
+  .activity-chip {
+    background: var(--card);
+    border: 1px solid var(--border); border-radius: 10px;
+    padding: 1rem 1.25rem;
+    font-size: 0.82rem; color: var(--muted);
+    transition: all 0.2s;
+  }
+  .activity-chip:hover { border-color: var(--border-bright); color: var(--text); }
+  .activity-chip strong { display: block; color: var(--text); font-weight: 500; margin-bottom: 2px; }
+
+  /* CONTACT */
+  .contact-wrapper {
+    max-width: 700px;
+  }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+  .contact-link {
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 1.25rem 1.75rem; text-decoration: none;
+    color: var(--text); transition: all 0.2s;
+  }
+  .contact-link:hover { border-color: var(--accent); transform: translateX(6px); }
+  .contact-link .link-left { display: flex; align-items: center; gap: 1rem; }
+  .contact-link .link-icon {
+    width: 38px; height: 38px; border-radius: 8px;
+    background: var(--tag-bg); display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+  }
+  .contact-link .link-label { font-size: 0.78rem; color: var(--muted); display: block; }
+  .contact-link .link-value { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 600; }
+  .contact-link .arrow { color: var(--muted); font-size: 1.1rem; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    color: var(--muted); font-size: 0.75rem;
+  }
+
+  /* SCROLL FADE IN */
+  .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s, transform 0.6s; }
+  .fade-in.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 7rem 1.5rem 4rem; }
+    section { padding: 4rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; }
+    .timeline-item { grid-template-columns: 100px 1px 1fr; gap: 0 1rem; }
+    footer { padding: 1.5rem; flex-direction: column; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">MF<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-tag">Available for internships &amp; opportunities</div>
+  <h1 class="hero-name">Mohamed<br><em>Fathy</em><br>Ahmed</h1>
+  <p class="hero-sub">Software Engineer · ML Developer · Computing student at Egypt University for Informatics. Building intelligent systems, one commit at a time.</p>
+  <div class="hero-cta">
+    <a href="#projects" class="btn btn-primary">View Projects →</a>
+    <a href="#contact" class="btn btn-outline">Get in Touch</a>
+  </div>
+  <div class="hero-scroll">scroll to explore</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">// 01 — About</div>
+  <h2 class="section-title">Driven by curiosity,<br>built on code.</h2>
+  <div class="about-grid">
+    <div class="about-text fade-in">
+      <p>I'm a second-year Computing and Information Science student passionate about <strong>machine learning, software engineering, and full-stack development</strong>. From building school management systems in C++ to deploying ML models that evaluate CVs and predict house prices, I love turning complex problems into elegant solutions.</p>
+      <p>Last summer I interned as a <strong>Software Engineer at Khan Studio</strong>, deepening my experience in real-world software design and delivery. I'm also active in EUI's tech community — leading PR at WeDev Club, contributing to GDSC, and competing in ECPC 2024.</p>
+      <p>Currently seeking an internship where I can contribute, grow, and ship things that matter.</p>
+    </div>
+    <div class="about-stats fade-in">
+      <div class="stat-box">
+        <span class="stat-num">8+</span>
+        <span class="stat-label">Projects built</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">5+</span>
+        <span class="stat-label">Tech clubs & orgs</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">2027</span>
+        <span class="stat-label">Expected graduation</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">3+</span>
+        <span class="stat-label">Certifications earned</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" style="background: var(--surface);">
+  <div class="section-label">// 02 — Skills</div>
+  <h2 class="section-title">What I work with.</h2>
+  <div class="skills-grid">
+    <div class="skill-card fade-in">
+      <div class="skill-card-icon" style="background: rgba(91,106,247,0.15);">💻</div>
+      <h3>Languages</h3>
+      <div class="tags">
+        <span class="tag">Python</span>
+        <span class="tag">C++</span>
+        <span class="tag">Scala</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">HTML/CSS</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-card-icon" style="background: rgba(167,139,250,0.15);">🧠</div>
+      <h3>Machine Learning & AI</h3>
+      <div class="tags">
+        <span class="tag">Deep Learning</span>
+        <span class="tag">CV Evaluator (ML)</span>
+        <span class="tag">House Price Prediction</span>
+        <span class="tag">Prompt Engineering</span>
+        <span class="tag">AWS AI Ecosystem</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-card-icon" style="background: rgba(244,197,66,0.12);">🗄️</div>
+      <h3>Data & Big Data</h3>
+      <div class="tags">
+        <span class="tag">Data Structures</span>
+        <span class="tag">Hadoop</span>
+        <span class="tag">Docker</span>
+        <span class="tag">SQL basics</span>
+        <span class="tag">Algorithms</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-card-icon" style="background: rgba(74,222,128,0.1);">🛠️</div>
+      <h3>Tools & Dev</h3>
+      <div class="tags">
+        <span class="tag">Git & GitHub</span>
+        <span class="tag">Visual Studio</span>
+        <span class="tag">Docker</span>
+        <span class="tag">OOP</span>
+        <span class="tag">Functional Programming</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-card-icon" style="background: rgba(248,113,113,0.1);">🎨</div>
+      <h3>Software Design</h3>
+      <div class="tags">
+        <span class="tag">System Design</span>
+        <span class="tag">UI/UX Principles</span>
+        <span class="tag">Architecture Patterns</span>
+        <span class="tag">GUI Development</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-card-icon" style="background: rgba(56,189,248,0.1);">🔒</div>
+      <h3>Cybersecurity Basics</h3>
+      <div class="tags">
+        <span class="tag">Secure Coding</span>
+        <span class="tag">Encryption Concepts</span>
+        <span class="tag">Access Control</span>
+        <span class="tag">Data Privacy</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">// 03 — Experience</div>
+  <h2 class="section-title">Where I've been.</h2>
+  <div class="timeline">
+    <div class="timeline-item fade-in">
+      <div class="timeline-date">Summer 2024</div>
+      <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-connector"></div></div>
+      <div class="timeline-body">
+        <h3>Software Engineer Intern</h3>
+        <div class="company">Khan Studio</div>
+        <p>Contributed to real-world software engineering projects, gaining hands-on experience in software design, development workflows, and collaborative delivery. Applied knowledge of software architecture and design patterns in a professional environment.</p>
+      </div>
+    </div>
+    <div class="timeline-item fade-in">
+      <div class="timeline-date">2024 – Present</div>
+      <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-connector"></div></div>
+      <div class="timeline-body">
+        <h3>Head of PR & Mentor</h3>
+        <div class="company">WeDev Club, EUI</div>
+        <p>Lead public relations strategy and mentor junior members in programming fundamentals and career development. Organize technical workshops and community events.</p>
+      </div>
+    </div>
+    <div class="timeline-item fade-in">
+      <div class="timeline-date">2024 – Present</div>
+      <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-connector"></div></div>
+      <div class="timeline-body">
+        <h3>Brand Ambassador</h3>
+        <div class="company">Egypt University of Informatics (EUI)</div>
+        <p>Represent the university at events and outreach initiatives, communicating the institution's vision and programs to prospective students and partners.</p>
+      </div>
+    </div>
+    <div class="timeline-item fade-in">
+      <div class="timeline-date">2024</div>
+      <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-connector"></div></div>
+      <div class="timeline-body">
+        <h3>ECPC Competitor</h3>
+        <div class="company">Egyptian Collegiate Programming Contest</div>
+        <p>Competed in one of Egypt's most prestigious programming competitions, solving algorithmic challenges under time pressure and sharpening problem-solving skills.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" style="background: var(--surface);">
+  <div class="section-label">// 04 — Projects</div>
+  <h2 class="section-title">Things I've built.</h2>
+  <div class="projects-grid">
+    <div class="project-card fade-in">
+      <span class="project-num">01</span>
+      <h3>CV Evaluator — ML Model</h3>
+      <p>An intelligent system that reads and evaluates resumes using machine learning, scoring candidates based on skills, experience, and relevance. Demonstrates NLP and classification techniques in Python.</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">ML</span><span class="tag">NLP</span></div>
+    </div>
+    <div class="project-card fade-in">
+      <span class="project-num">02</span>
+      <h3>Cairo House Price Predictor</h3>
+      <p>Regression model trained on real Cairo real-estate data to predict house prices. Includes feature engineering, data preprocessing, and model evaluation metrics.</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">Regression</span><span class="tag">Data Analysis</span></div>
+    </div>
+    <div class="project-card fade-in">
+      <span class="project-num">03</span>
+      <h3>Smart Image Resizer</h3>
+      <p>Content-aware image resizing using seam carving. Identifies and removes the least visually important vertical or horizontal seams using dynamic programming, preserving key content.</p>
+      <div class="tags"><span class="tag">C++</span><span class="tag">Dynamic Programming</span><span class="tag">Greedy Algorithm</span></div>
+    </div>
+    <div class="project-card fade-in">
+      <span class="project-num">04</span>
+      <h3>Spotify-like Music Player</h3>
+      <p>A data-structure-focused music player implementing linked lists, binary trees, stacks, and queues to replicate core playlist and playback functionality.</p>
+      <div class="tags"><span class="tag">C++</span><span class="tag">Data Structures</span><span class="tag">Algorithms</span></div>
+    </div>
+    <div class="project-card fade-in">
+      <span class="project-num">05</span>
+      <h3>CareerPathExplorer Chatbot</h3>
+      <p>A functional-programming chatbot in Scala that guides students through career path exploration based on interests and interactive responses.</p>
+      <div class="tags"><span class="tag">Scala</span><span class="tag">Functional Programming</span><span class="tag">Chatbot</span></div>
+    </div>
+    <div class="project-card fade-in">
+      <span class="project-num">06</span>
+      <h3>School Management System</h3>
+      <p>Comprehensive C++ desktop application covering student enrollment, attendance tracking, and grade management with a full data management backend.</p>
+      <div class="tags"><span class="tag">C++</span><span class="tag">OOP</span><span class="tag">Visual Studio</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-label">// 05 — Certifications & Courses</div>
+  <h2 class="section-title">Always learning.</h2>
+  <div class="courses-list">
+    <div class="course-item fade-in">
+      <div class="course-badge" style="background: rgba(255,153,0,0.15); color: #ff9900; font-size: 0.65rem;">AWS</div>
+      <div class="course-info">
+        <h4>AWS AI-01 – Introduction to AI in the AWS Ecosystem</h4>
+        <p>Amazon Web Services · Official certification</p>
+      </div>
+    </div>
+    <div class="course-item fade-in">
+      <div class="course-badge" style="background: rgba(255,153,0,0.15); color: #ff9900; font-size: 0.65rem;">AWS</div>
+      <div class="course-info">
+        <h4>AWS AI-02 – Prompt Engineering</h4>
+        <p>Amazon Web Services · Official certification</p>
+      </div>
+    </div>
+    <div class="course-item fade-in">
+      <div class="course-badge" style="background: rgba(3,190,252,0.12); color: #03befc; font-size: 0.6rem;">DC</div>
+      <div class="course-info">
+        <h4>Introduction to Deep Learning in Python</h4>
+        <p>DataCamp · Neural networks, forward propagation, backpropagation, Keras</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACTIVITIES -->
+<section style="background: var(--surface);">
+  <div class="section-label">// 06 — Community</div>
+  <h2 class="section-title">Beyond the code.</h2>
+  <div class="activities-grid">
+    <div class="activity-chip fade-in">
+      <strong>WeDev Club, EUI</strong>Head of PR & Mentor
+    </div>
+    <div class="activity-chip fade-in">
+      <strong>Brand Ambassador</strong>Egypt University of Informatics
+    </div>
+    <div class="activity-chip fade-in">
+      <strong>GDSC, EUI</strong>PR Member – Google Dev Student Club
+    </div>
+    <div class="activity-chip fade-in">
+      <strong>TEDxEUI</strong>PR Member
+    </div>
+    <div class="activity-chip fade-in">
+      <strong>Enactus EUI</strong>Presentation Team Member
+    </div>
+    <div class="activity-chip fade-in">
+      <strong>Game Dev Club, EUI</strong>Active Member
+    </div>
+    <div class="activity-chip fade-in">
+      <strong>ECPC 2024</strong>Programming Competition Participant
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">// 07 — Contact</div>
+  <h2 class="section-title">Let's build something.</h2>
+  <div class="contact-wrapper">
+    <p style="color: var(--muted); margin-bottom: 0.5rem;">I'm currently looking for internship opportunities. Whether you have a question or just want to say hi — my inbox is open.</p>
+    <div class="contact-links">
+      <a href="mailto:Mmdfathy70@gmail.com" class="contact-link fade-in">
+        <div class="link-left">
+          <div class="link-icon">📧</div>
+          <div>
+            <span class="link-label">Email</span>
+            <span class="link-value">Mmdfathy70@gmail.com</span>
+          </div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+      <a href="https://linkedin.com/in/mohamed-fathy-b68b46320/" target="_blank" class="contact-link fade-in">
+        <div class="link-left">
+          <div class="link-icon">💼</div>
+          <div>
+            <span class="link-label">LinkedIn</span>
+            <span class="link-value">Mohamed Fathy</span>
+          </div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+      <a href="https://mahamedfathy23.github.io/simple-website/contact.html" target="_blank" class="contact-link fade-in">
+        <div class="link-left">
+          <div class="link-icon">🌐</div>
+          <div>
+            <span class="link-label">GitHub Pages</span>
+            <span class="link-value">mahamedfathy23.github.io</span>
+          </div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+      <a href="tel:+201061060408" class="contact-link fade-in">
+        <div class="link-left">
+          <div class="link-icon">📱</div>
+          <div>
+            <span class="link-label">Phone / WhatsApp</span>
+            <span class="link-value">+20 106 106 0408</span>
+          </div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2025 Mohamed Fathy Ahmed</span>
+  <span>Software Engineer · ML Developer · EUI</span>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
